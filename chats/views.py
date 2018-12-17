@@ -19,7 +19,8 @@ class ChatList(View):
         to=User.objects.get(username=receiver)
         me=request.user
         query = Q(Q(sender=me)&Q(receiver=to))|Q(Q(sender=to)&Q(receiver=me))
-        messages = Message.objects.filter(query)
+        #messages = Message.objects.filter(query).order_by('-timestamp')
+        messages = Message.objects.filter(query).order_by('timestamp')
         return render(request,"chatbox.html",{'messages':messages,'receiver':to})
 
     def post(self,request,receiver):

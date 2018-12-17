@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 {{messages}}
 <h1>{{receiver.username}}</h1>
 <form method="post" action="/chats/{{receiver.username}}/">
@@ -8,3 +11,4 @@
 
         <input type="submit" value="send">
     </form>
+{% endblock content %}
