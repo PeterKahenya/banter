@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from .models import Message
 from django.http import HttpResponse
 from django.db.models import Q
-
+from django.http import HttpResponse,JsonResponse
+from django.core import serializers
  
  
 
@@ -30,3 +31,13 @@ class ChatList(View):
         msg_obj=Message.objects.create(sender=me,receiver=to,msg=msg)
         msg_obj.save()
         return redirect("/chats/"+receiver+"/")
+
+class LiveChats(View):
+    def get(self,request,receiver):
+        to=User.objects.get(username=receiver)
+        me=request.user
+        query = Q(Q(sender=me)&Q(receiver=to))|Q(Q(sender=to)&Q(receiver=me))
+        #messages = Message.objects.filter(query).order_by('-timestamp')
+        messages =list(Message.objects.filter(query).order_by('timestamp'))
+        qs_json = serializers.serialize('json', messages)
+        return HttpResponse(qs_json, content_type='application/json')

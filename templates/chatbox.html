@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
+
+
 {% block content %}
-{{messages}}
+{% load static %}
+<script src="{% static "js/fetch_messages.js" %}"></script>
+<div id="previous-messages">
+    
+    </div>
 <h1>{{receiver.username}}</h1>
 <form method="post" action="/chats/{{receiver.username}}/">
     {% csrf_token %}
