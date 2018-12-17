@@ -1,4 +1,10 @@
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="send">
-</form>
+{{messages}}
+<h1>{{receiver.username}}</h1>
+<form method="post" action="/chats/{{receiver.username}}/">
+    {% csrf_token %}
+    
+    <textarea name="msg" cols="40" rows="10" maxlength="10000" required id="id_msg">
+        </textarea></p>
+
+        <input type="submit" value="send">
+    </form>

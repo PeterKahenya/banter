@@ -1,6 +1,6 @@
 from django.urls import path,include
-from .views import UsersList,MessageCreate
+from .views import UsersList,ChatList
 urlpatterns=[
     path("",UsersList.as_view()),
-    path("chats/",MessageCreate.as_view(),name="message_create")
+    path("chats/<slug:receiver>/",ChatList.as_view(),name="message_list"),
 ]

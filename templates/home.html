@@ -3,25 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
+    <title>banter:home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="" />
     <script src=""></script>
 </head>
 <body>
-    <p><a href="{% url 'password_reset' %}">reset password</a></p>
     {% if request.user.is_authenticated %}
-    welcome back  <a href='/accounts/logout'>logout</a> 
-
-    {% for user in users_list %}
-    <li><a href="{% url 'message_create' %}">{{user}}</a></li>
-        {% empty %}
-    <li>No users yet.</li>
-{% endfor %}
-{% else %}
-    <p>not logged in</p>
-
+        <h1>Welcome {{request.user.username}}</h1>
+        <a href="{% url 'logout' %}">logout</a>
+        {% for user in users_list %}
+        
+            <div>
+                    <a href="/chats/{{user.username}}/"><h1>{{user.username}}</h1></a>
+                    
+            </div>
+        {% endfor %}
+    {% else %}
+    <a href="{% url 'login' %}">login</a>
     {% endif %}
-
 </body>
 </html>
