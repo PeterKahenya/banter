@@ -3,12 +3,30 @@ function fetch_messages() {
         url: window.location.origin+"/livechats/"+window.location.pathname.split("/")[2],
         success: function(response) {
             chats=""
-            $("#previous-messages").empty();
+            $(".chatlogs").empty();
             response.map(chat=>{
-                chats+='<div class="card"><div class="card-body">'+
-                chat.fields.msg+'</div></div>'
+                console.log(chat.fields.sender)
+                myid=parseInt($("#myid").val())
+                if (parseInt(chat.fields.sender)===myid) {
+            
+                    chats+='<div class="chat self">'+
+                    '<div class="user-photo">'+
+                        '<img src="https://randomuser.me/api/portraits/men/73.jpg" alt="">'+
+                    '</div>'+
+                   ' <div class="chat-message">'+
+                       chat.fields.msg+
+                    '</div></div>'
+                } else {
+                    chats+='<div class="chat friend">'+
+                    '<div class="user-photo">'+
+                        '<img src="https://randomuser.me/api/portraits/men/79.jpg" alt="">'+
+                    '</div>'+
+                   ' <div class="chat-message">'+
+                       chat.fields.msg+
+                    '</div></div>'
+                }
             })
-            $("#previous-messages").append(chats) 
+            $(".chatlogs").append(chats) 
         },
         error: function(xhr) {
         }

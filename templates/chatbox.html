@@ -3,16 +3,20 @@
 {% block content %}
 {% load static %}
 <script src="{% static "js/fetch_messages.js" %}"></script>
-<div id="previous-messages">
-    
-    </div>
-<h1>{{receiver.username}}</h1>
-<form method="post" action="/chats/{{receiver.username}}/">
-    {% csrf_token %}
-    
-    <textarea name="msg" cols="40" rows="10" maxlength="10000" required id="id_msg">
-        </textarea></p>
+<link rel="stylesheet" href="{% static "css/chatbox.css" %}">
 
-        <input type="submit" value="send">
-    </form>
+<div class="chatbox">
+    <input type="hidden" value="{{request.user.id}}" id="myid">
+    <h1>{{receiver.username}}</h1>
+    <div class="chatlogs">
+    </div>
+    <div class="chat-form">
+        <form method="post" action="/chats/{{receiver.username}}/">
+            {% csrf_token %}
+            <textarea name="msg">
+            </textarea>
+            <input type="submit" value="send" class="btn btn-secondary">
+        </form>
+    </div>
+</div>
 {% endblock content %}
