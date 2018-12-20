@@ -1,63 +1,57 @@
 {% extends "base.html" %}
+
+{% block title %}
+    * Home
+{% endblock title %}
+
 {% block content %}
-       
-        {% if request.user.is_authenticated %}
-
-        <h1>Welcome {{request.user.username}}</h1>
-        <a href="{% url 'logout' %}">logout</a>
-        {% for user in users_list %}
-        
-            <div>
-                    <a href="/chats/{{user.username}}/"><h1>{{user.username}}</h1></a>
-                    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <div class="features container">
+            <h1 style="color:#ccc;">
+                All <span style="color:#fff;font-weight:bolder;">Banter</span> is welcome here...
+            </h1>
+            <div class="logo">
+                <img src="{% static 'img/avatar.png'%}">
             </div>
-        {% endfor %}
-    {% else %}
-   
-    <div class="container">
-        
-        <div class="features">
-            <h1>All <strong style="color:#228B22;">Banter</strong> is welcome here...</h1>
-        </div>
-
-{% load static %}
-       
-<img src="{% static 'img/logo.gif'%}" class="logo">
-<div>
-    <a class="btn btn-outline-success" style="margin-left:45%;border-color:#228B22;" href="{% url 'login' %}">Get Started</a>
-</div>
-        <div class="row" style="padding-top:20px;">
-            <div class="col-md-3 text-center">
-                <div class="icon">
-                    <i class="fa fa-desktop"></i>
+            <div class="action-btn">
+                <a href="{% url 'login' %}" class="btn btn-success" style="background-color:darkgreen;border-color:darkgreen;transform: scale(1.5, 1.5);" >Get Started</a>
+            </div>
+            <div class="row" style="padding-top:20px;">
+                <div class="col-md-3 text-center">
+                    <div class="icon">
+                        <i class="fa fa-desktop"></i>
+                    </div>
+                    <h3>Web Chat on Desktop</h3>
+                    <p>Your favorite messaging platform on your desktop, for the class and the workplace</p>
                 </div>
-                <h3>Web Chat on Desktop</h3>
-                <p>Your favorite messaging platform on your desktop, for the class and the workplace</p>
-            </div>
-            <div class="col-md-3 text-center">
+                
+                <div class="col-md-3 text-center">
                     <div class="icon" >
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                     </div>
                     <h3>Proximity based chat</h3>
                     <p>Chat with someone across the room with the best technology avaliable</p>
                 </div>
+                
                 <div class="col-md-3 text-center">
-                        <div class="icon" >
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        </div>
-                        <h3>Create a Temporary Profile</h3>
-                        <p>Your privacy is too important to let some big company hold your data.</p>
+                    <div class="icon" >
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     </div>
-                    <div class="col-md-3 text-center">
-                            <div class="icon" >
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                            </div>
-                            <h3>Create Proximity based discussion groups</h3>
-                            <p >Let others know your location and create Temporary groups for the people in your Proximity</p>
-                        </div>
+                    <h3>Create a Temporary Profile</h3>
+                    <p>Your privacy is too important to let some big company hold your data.</p>
+                </div>
+                
+                <div class="col-md-3 text-center">
+                    <div class="icon" >
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <h3>Create Proximity based discussion groups</h3>
+                    <p >Let others know your location and create Temporary groups for the people in your Proximity</p>
+                </div>
+            </div>
         </div>
-    </div>
-    {% endif %}
+
 
  
 {% endblock content %}

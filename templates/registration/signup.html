@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
-  <a href="/accounts/login">login</a>
-</body>
-</html>
+{% extends '../base.html' %}
+{% block title %}
+    * SignUp
+{% endblock title %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/signup.css'%}">
+<div class="loginbox">
+      <a href="/"><img src="{% static 'img/avatar.png'%}" class="avatar" alt=""></a>
+      <h1>Sign up</h1>
+      
+      <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger" style="font-size: 10px;">
+                {{form.errors}}
+            </div>    
+        {% endif %}
+        <input type="email" name="email" maxlength="254" autofocus id="id_email" required id="id_username" placeholder="someone@example.com">
+        <input type="text" name="username" maxlength="150" required id="id_username" placeholder="Username"> 
+        <input type="password" name="password1" required id="id_password1" placeholder="Password">
+        <input type="password" name="password2" required id="id_password2" placeholder="Confirm Password"> 
+        <input type="submit" value="Sign Up"></form>
+      <a href="/accounts/login">I have an account</a>
+{% endblock %}
+ 

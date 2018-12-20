@@ -5,6 +5,8 @@
 <script src="{% static "js/fetch_messages.js" %}"></script>
 <link rel="stylesheet" href="{% static "css/chatbox.css" %}">
 
+        <h1>Welcome {{request.user.username}}</h1>
+        <a href="{% url 'logout' %}">logout</a>
 <div class="chatbox">
     <input type="hidden" value="{{request.user.id}}" id="myid">
     <h1>{{receiver.username}}</h1>
